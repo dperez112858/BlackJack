@@ -1,4 +1,20 @@
-.tablero_layout{
-    background-image: url("../../assets/media/Blackjack_layout.png");  
+.centrado{
+    text-align: center;
+}
+
+.tablero{
+    background-image: url("../../assets/media/Blackjack_layout.png");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 45%;
+}
+
+.carta{
+    height: 75px;
+}
+
+.row {
+    height: 130px;
+    padding: 25px;
 }
 
