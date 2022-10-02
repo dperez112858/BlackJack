@@ -1,0 +1,15 @@
+.centrado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding-top: 50px;
+  }
+  form {
+      width: 450px;
+    }
+  
+  h1{
+      color:antiquewhite;
+    }
+  
