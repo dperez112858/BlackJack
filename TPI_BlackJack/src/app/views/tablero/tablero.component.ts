@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PartidaService } from 'src/app/services/partida.service';
 import { Carta } from 'src/app/models/carta';
-import { Mazo } from 'src/app/models/mazo';
 import { throws } from 'assert';
 
 @Component({
@@ -12,7 +11,8 @@ import { throws } from 'assert';
 export class TableroComponent implements OnInit {
 
   obj: any;
-  direc: string;
+  cartas: Carta[]=[];
+  suma: number=0;
 
  
 
@@ -23,28 +23,7 @@ export class TableroComponent implements OnInit {
 
 
   }
-  // barajar(){
 
-  
-  //     for (let i = 0; i < this.palo.length; i++) {
-  //       for (let j = 0; j < this.numero.length; j++){
-  //         console.log(this.palo[i], this.numero[j])
-
-  //         var obj= {
-  //           numero: this.numero[j],
-  //           palo: this.palo[i],
-  //           activo: false
-  //         };
-
-  //         this.carta.push(obj)
-
-  //         }
-          
-          
-  //           }
-
-  //   }
-   
 
   
     
@@ -54,10 +33,33 @@ export class TableroComponent implements OnInit {
   }
 
   pedir(){
-    //alert(this.partidaservice.pedir());
     var obj= this.partidaservice.pedir();
-    this.direc= `../../assets/media/cartas/${obj.numero}${obj.palo}.png`;
+
+    var o={
+      numero: obj.numero,
+      palo: obj.palo,
+      activo: true,
+      direc: obj.direc
+    }
+   this.cartas.push(o);
    
+   if(obj.numero== 1){
+    const result: boolean = confirm(
+      'Quiere que el A valga 11?'
+    );
+    if(result){
+      this.suma+=10;
+    }
+   }
+   if(obj.numero>=10){
+    this.suma+=10
+
+   }
+   if(obj.numero<10){
+    this.suma+=obj.numero;
+   }
+
+  
     
     
 
