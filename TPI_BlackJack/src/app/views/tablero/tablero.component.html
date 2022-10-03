@@ -14,11 +14,15 @@
             </div>
           </div>      
         <div class="row">
-            <div class="col">
-                <img src={{direc}} alt="jota" class="carta">
-                <img src="../../../assets/media/cartas/Jt.png" alt="jota" class="carta">
+            <div class="col" *ngFor="let lista of cartas">
+                <img src="../../assets/media/cartas/{{lista.numero}}{{lista.palo}}.png" alt="jota" class="carta">
             </div>
           </div>      
+          <div class="row">
+            <div class="col">
+              <h3>Suma: {{suma}}</h3>
+            </div>
+          </div>   
           <div class="row">
             <div class="col">
               <button class="btn btn-primary" (click)="pedir()">Pedir</button>

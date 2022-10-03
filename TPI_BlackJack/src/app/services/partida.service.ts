@@ -29,7 +29,8 @@ export class PartidaService {
         var obj = {
           numero: this.numero[j],
           palo: this.palo[i],
-          activo: false
+          activo: false,
+          direc: `../../assets/media/cartas/${this.numero[j]}${this.palo[i]}.png`
         };
 
         this.carta.push(obj)
@@ -45,7 +46,6 @@ export class PartidaService {
   pedir(): Carta{
 
     this.indice= Math.floor(Math.random() * 52 );
-    this.direc= `${this.carta[this.indice].numero}${this.carta[this.indice].palo}`
     this.carta[this.indice].activo=true;
     
     return this.carta[this.indice];
