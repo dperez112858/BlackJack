@@ -9,10 +9,10 @@
                 <form>
                     <div>
                         <input type="text" class="form-control" name="nombreJugador" [(ngModel)]="nombreJugador"
-                            id="nombreJugador" placeholder="ingrese su nombre" />{{ nombreJugador }}
+                            id="nombreJugador" placeholder="ingrese su nombre" />
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary" routerLink="juego">Jugar</button>
+                    <button type="submit" class="btn btn-primary" routerLink="juego" (click)="jugar(nombreJugador)">Jugar</button>
                     <br>
                     <br>
                     <h2>TPI - DABD</h2>

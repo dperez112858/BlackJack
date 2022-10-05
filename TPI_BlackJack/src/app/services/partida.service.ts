@@ -20,9 +20,6 @@ export class PartidaService {
   constructor() { }
 
   barajar() {
-
-
-
     for (let i = 0; i < this.palo.length; i++) {
       for (let j = 0; j < this.numero.length; j++) {
 
@@ -35,21 +32,14 @@ export class PartidaService {
         };
 
         this.carta.push(obj)
-
-
       }
-
-
     }
 
   }
 
   pedir(): Carta {
-
     this.indice = Math.floor(Math.random() * 52);
-    
     if(this.carta[this.indice].activo==true){
-      console.log('la carta ya fue sacada, no se puede repetir.')
       this.pedir();
     }
     this.carta[this.indice].activo = true;
