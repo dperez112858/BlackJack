@@ -1,34 +1,81 @@
-<div>
-    <div class="container tablero centrado">
-        <div class="row">
-            <div class="col">
-            </div>
-          </div>      
-        <div class="row">
-          <div class="col" *ngFor="let lista of cartas">
+<div class="container centrado">
+  <div class="row row-cols-2" style="height: 800px;">
+    <div class="col-4 marcador">
+      <br>
+      <h3>Banca: {{jugador[0].puntos}}</h3>
+      <h3>Jugador: {{jugador[1].puntos}}</h3>
+      <button class="btn btn-primary" (click)="pedir()" [ngClass]="{disabled : stand}">Pedir</button>
+      <button class="btn btn-primary" (click)="pasar()" [ngClass]="{disabled : stand}">Pasar</button>
+      <br>
+      <p>{{ mensaje }}</p>
+      <button *ngIf="finalizar" class="btn btn-primary" routerLink="">Finalizar partida</button>
+    </div>
+    <div class="col-8 tablero">
+      <div class="row crupierCarta">  
+        <div class="col">
+          <span *ngFor="let lista of cartas">
             <img src={{lista.direc}} alt="jota" class="carta" *ngIf="lista.jugador==0">
+          </span>
         </div>
+      </div>
+      <div class="row">
+        <div class="col">
         </div>
-        <div class="row">
-            <div class="col">
-            </div>
-          </div>      
-        <div class="row">
-            <div class="col" *ngFor="let lista of cartas">
-                <img src={{lista.direc}} alt="jota" class="carta" *ngIf="lista.jugador==1">
-            </div>
-          </div>     
-          <div class="row">
-            <div class="col">
-              <h3>Maquina: {{jugador[0].puntos}}</h3>
-              <h3>Jugador: {{jugador[1].puntos}}</h3>
-            </div>
-          </div>   
-          <div class="row">
-            <div class="col">
-              <button class="btn btn-primary" (click)="pedir()" [ngClass]="{disabled : stand}">Pedir</button>
-              <button class="btn btn-primary" (click)="pasar()"[ngClass]="{disabled : stand}">Pasar</button>
-            </div>
-          </div>      
+      </div>
+      <div class="row jugadorCarta">
+        <div class="col">
+          <span *ngFor="let lista of cartas">
+            <img src={{lista.direc}} alt="jota" class="carta" *ngIf="lista.jugador==1">
+          </span>
+        </div>
       </div>
     </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- <div>
+  <div class="container tablero centrado">
+    <div class="row">
+      <div class="col">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h3>Banca: {{jugador[0].puntos}}</h3>
+        <span *ngFor="let lista of cartas">
+          <img src={{lista.direc}} alt="jota" class="carta" *ngIf="lista.jugador==0">
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <span *ngFor="let lista of cartas">
+          <img src={{lista.direc}} alt="jota" class="carta" *ngIf="lista.jugador==1">
+        </span>
+        <h3>Jugador: {{jugador[1].puntos}}</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-primary" (click)="pedir()" [ngClass]="{disabled : stand}">Pedir</button>
+        <button class="btn btn-primary" (click)="pasar()" [ngClass]="{disabled : stand}">Pasar</button>
+        <button *ngIf="finalizar" class="btn btn-primary" routerLink="">Finalizar partida</button>
+
+      </div>
+    </div>
+  </div>
+</div> -->
