@@ -5,6 +5,7 @@ export class Carta {
     palo: string;
     activo:boolean=false;
     direc: string;
+    jugador: number=0;
 
     constructor(numero: number, palo: string, activo: boolean){
 
