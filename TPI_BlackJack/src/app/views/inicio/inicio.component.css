@@ -4,12 +4,26 @@
     justify-content: center;
     min-height: 100vh;
     padding-top: 50px;
+    text-align: center;
   }
-  form {
+  /* form {
       width: 450px;
-    }
+    } */
   
   h1, h2, h3{
       color:antiquewhite;
     }
   
+  .logo{
+    margin: 40px;
+    width: 600px;
+  }
+  
+  .oval {
+    width: 1300px;
+    height: 600px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #005500;
+}
