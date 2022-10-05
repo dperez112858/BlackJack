@@ -1,27 +1,28 @@
 <div class="container">
     <div class="centrado">
-    <div class="row">
-        <div class="col-sm">
-        </div>
-        <div class="col-sm">
-            <h1>Bienvenido a Blackjack</h1>
-            <br>
-            <form>
-                <div>
-                    <input type="text" class="form-control" id="inputJugador" placeholder="ingrese su nombre">
-                </div>
+        <div class="row oval">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+                <img src="../../../assets/media/bj_logo.png" alt="" class="logo">
                 <br>
-                <button type="submit" class="btn btn-primary" routerLink="juego">Jugar</button>
-                <br>
-                <br>
-                <h2>TPI - DABD</h2>
-                <h3>Alvaro Basbus - 112823</h3>
-                <h3>David Perez - 112858</h3>
-            </form>
-        </div>
-        <div class="col-sm">
+                <form>
+                    <div>
+                        <input type="text" class="form-control" name="nombreJugador" [(ngModel)]="nombreJugador"
+                            id="nombreJugador" placeholder="ingrese su nombre" />{{ nombreJugador }}
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary" routerLink="juego">Jugar</button>
+                    <br>
+                    <br>
+                    <h2>TPI - DABD</h2>
+                    <h3>Alvaro Basbus - 112823</h3>
+                    <h3>David Perez - 112858</h3>
+                </form>
+            </div>
+            <div class="col-sm">
 
+            </div>
         </div>
     </div>
-</div>
 </div>
