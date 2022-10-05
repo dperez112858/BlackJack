@@ -5,12 +5,16 @@
       <!--<p><app-inicio>[nombreJugador=]</app-inicio></p>-->
       <img src="../../../assets/media/bj_logo.png" alt="logo" class="logo">
       <h3>Banca: {{jugador[0].puntos}}</h3>
-      <h3>Jugador: {{jugador[1].puntos}}</h3>
-      <button class="btn btn-primary" (click)="pedir()" [ngClass]="{disabled : stand}">Pedir</button>
-      <button class="btn btn-primary" (click)="pasar()" [ngClass]="{disabled : stand}">Pasar</button>
+      <h3>{{jugador[1].nombre}}: {{jugador[1].puntos}}</h3>
+      <button class="btn btn-primary" *ngIf="iniciar==false" (click)="pedir()" [ngClass]="{disabled : stand}">Pedir</button>
+      <button class="btn btn-primary" *ngIf="iniciar==false" (click)="pasar()" [ngClass]="{disabled : stand}">Pasar</button>
       <br>
       <p>{{ mensaje }}</p>
+      <button *ngIf="finalizar" class="btn btn-primary" (click)="reiniciar()">Reiniciar partida</button>
       <button *ngIf="finalizar" class="btn btn-primary" routerLink="">Finalizar partida</button>
+      <br>
+      <br>
+      <button *ngIf="iniciar" class="btn btn-primary" (click)="repartir()">Repartir</button>
     </div>
     <div class="col-8 tablero">
       <div class="row crupierCarta">

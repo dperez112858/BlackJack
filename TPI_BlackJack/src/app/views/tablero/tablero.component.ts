@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PartidaService } from 'src/app/services/partida.service';
 import { Carta } from 'src/app/models/carta';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Jugador } from 'src/app/models/jugador';
-import { interval } from 'rxjs';
-import { setTimeout } from 'timers';
+
 
 @Component({
   selector: 'app-tablero',
@@ -12,46 +11,62 @@ import { setTimeout } from 'timers';
   styleUrls: ['./tablero.component.css']
 })
 export class TableroComponent implements OnInit {
-
+  
   obj: any;
   cartas: Carta[]=[];
   sum: number=0;
-  sumJugador: number=0;
-  c: string;
+  //sumJugador: number=0;
+  //c: string;
   idjugador: number=0;
+  nombreJugador: string;
   jugador: Jugador[]=[];
-  stand: boolean=false;
-  finalizar: boolean = false;
-  mensaje: string = "";
+  stand: boolean;
+  finalizar: boolean;
+  mensaje: string;
+  iniciar: boolean;
   
-  constructor(private partidaservice: PartidaService, private router: Router) { 
+  
+  constructor(private partidaservice: PartidaService, private router: Router, private activatedRoute: ActivatedRoute) { 
     
   }
 
   ngOnInit(): void {
+    this.iniciar=true;
+    this.finalizar=false;
+    this.stand=true;
+    this.mensaje="";
   this.partidaservice.barajar();
- 
-  this.inicio();
-  this.idjugador=1;
+  this.activatedRoute.params.subscribe({
+    next: (params) => {
+      this.nombreJugador = params['nombreJugador']; } });
+
+  var x0={
+    idjugador: 0,
+    nombre: "maquina",
+    puntos: 0
+  }
+  this.jugador.push(x0)
+
+  var x1={
+    idjugador: 1,
+    nombre: this.nombreJugador,
+    puntos: 0
+  }
+  this.jugador.push(x1)
+
+
+  }
+
+  repartir(){
+    this.iniciar=false;
+    this.inicio();
+    this.idjugador=1;
+    this.pedir();
+    this.pedir();
+    this.stand=false;
   }
 
   inicio(){
-    //creamos los jugadores:
-    var x0={
-      idjugador: 0,
-      nombre: "maquina",
-      puntos: 0
-    }
-    this.jugador.push(x0)
-
-    var x1={
-      idjugador: 1,
-      nombre: "jugador1",
-      puntos: 0
-    }
-    this.jugador.push(x1)
-
-    /////// iniciamos con la primera carta de la maquina
     var obj= this.partidaservice.pedir();
       var o={
         numero: obj.numero,
@@ -95,28 +110,34 @@ export class TableroComponent implements OnInit {
 
   }
 
+  reiniciar(){
+    this.cartas.splice(0,10)
+    this.jugador.splice(0,10);
+    this.partidaservice.reset();
+    this.ngOnInit();
+    this.idjugador=1;
+    this.stand=false;
+    this.mensaje="";
+    this.finalizar=false;
+  }
+
+
 
    comprobar(){
     if(this.jugador[0].puntos>21){
-      this.mensaje=`¡Ganaste! la maquina perdio por tener mas de 21 puntos. Tu puntos son: ${this.jugador[1].puntos}`
-      // alert(`¡Ganaste! la maquina perdio por tener mas de 21 puntos. Tu puntos son: ${this.jugador[1].puntos}`)
-      //this.router.navigate(['']);
-      this.partidaservice.reset();
+      this.mensaje=`¡Ganaste! la maquina perdio por tener mas de 21 puntos`
     }
-    if(this.jugador[0].puntos>this.jugador[1].puntos&&this.jugador[0].puntos<21){
-      this.mensaje=`¡Perdiste! la maquina tiene ${this.jugador[0].puntos} puntos. Tu puntos son: ${this.jugador[1].puntos}`
-     // this.router.navigate(['']);
-      this.partidaservice.reset();
+    if(this.jugador[0].puntos>this.jugador[1].puntos && this.jugador[0].puntos<=21){
+      this.mensaje=`¡Perdiste!` }
     if(this.jugador[0].puntos==this.jugador[1].puntos){
       this.mensaje=`¡Empate! Ambos tienen: ${this.jugador[1].puntos}`
-      //this.partidaservice.reset();
+    }
+    if(this.jugador[1].puntos>this.jugador[0].puntos && this.jugador[0].puntos<21){
+      this.mensaje=`¡Ganaste!`
     }
 
-    }else{
-      this.mensaje=`¡Ganaste! Tu puntos son: ${this.jugador[1].puntos}`
-      //this.router.navigate(['']);
-      this.partidaservice.reset();
-    }
+
+    this.partidaservice.reset();
   }
 
   pedir(){
@@ -145,8 +166,7 @@ export class TableroComponent implements OnInit {
    this.jugador[this.idjugador].puntos=this.partidaservice.calcularPuntos(obj.numero);
 
    if(this.jugador[this.idjugador].puntos>21){
-    this.mensaje=`¡Perdiste! superaste los 21 puntos. Tu puntos son: ${this.jugador[this.idjugador].puntos}`
-    //this.router.navigate(['']);
+    this.mensaje=`¡Perdiste! superaste los 21 puntos`
     this.partidaservice.reset();
     this.finalizar=true;
     this.stand=true;

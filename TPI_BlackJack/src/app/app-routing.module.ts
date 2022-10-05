@@ -4,7 +4,7 @@ import { InicioComponent } from './views/inicio/inicio.component';
 import { TableroComponent } from './views/tablero/tablero.component';
 
 const routes: Routes = [
-  { path: "juego", component: TableroComponent },
+  { path: "juego/:nombreJugador", component: TableroComponent },
   { path: "**", component: InicioComponent }
 ];
 
