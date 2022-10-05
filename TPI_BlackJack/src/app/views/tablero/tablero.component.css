@@ -6,7 +6,7 @@
     background-image: url("../../../assets/media/Blackjack_layout.png");
     background-repeat: no-repeat;
     background-position: center top;
-    background-size: 45%;
+    background-size: 85%;
 }
 
 .carta{
@@ -14,7 +14,27 @@
     display: inline-block;
 }
 
-.row {
-    height: 135px;
-    padding: 25px;
+.crupierCarta {
+    margin-top: 25%;
+}
+
+.jugadorCarta{
+    margin-top: 25%
+}
+
+
+
+h3{
+    color:white;
+}
+
+button{
+    margin: 5px;
+}
+
+.marcador{
+    height: 350px; 
+    border-radius: 
+    0 0 21px 21px;
+    background-color: #005500 !important;
 }

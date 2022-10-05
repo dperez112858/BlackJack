@@ -21,8 +21,8 @@ export class TableroComponent implements OnInit {
   idjugador: number=0;
   jugador: Jugador[]=[];
   stand: boolean=false;
-
-
+  finalizar: boolean = false;
+  mensaje: string = "";
   
   constructor(private partidaservice: PartidaService, private router: Router) { 
     
@@ -90,29 +90,31 @@ export class TableroComponent implements OnInit {
 
      
     }
-
+    this.finalizar=true;
     this.comprobar();
-
-    
-
 
   }
 
 
    comprobar(){
     if(this.jugador[0].puntos>21){
-      alert(`¡Ganaste! la maquina perdio por tener mas de 21 puntos. Tu puntos son: ${this.jugador[1].puntos}`)
-      this.router.navigate(['']);
+      this.mensaje=`¡Ganaste! la maquina perdio por tener mas de 21 puntos. Tu puntos son: ${this.jugador[1].puntos}`
+      // alert(`¡Ganaste! la maquina perdio por tener mas de 21 puntos. Tu puntos son: ${this.jugador[1].puntos}`)
+      //this.router.navigate(['']);
       this.partidaservice.reset();
     }
-    if(this.jugador[0].puntos>this.jugador[1].puntos){
-      alert(`¡Perdiste! la maquina tiene ${this.jugador[0].puntos} puntos. Tu puntos son: ${this.jugador[1].puntos}`)
-      this.router.navigate(['']);
+    if(this.jugador[0].puntos>this.jugador[1].puntos&&this.jugador[0].puntos<21){
+      this.mensaje=`¡Perdiste! la maquina tiene ${this.jugador[0].puntos} puntos. Tu puntos son: ${this.jugador[1].puntos}`
+     // this.router.navigate(['']);
       this.partidaservice.reset();
+    if(this.jugador[0].puntos==this.jugador[1].puntos){
+      this.mensaje=`¡Empate! Ambos tienen: ${this.jugador[1].puntos}`
+      //this.partidaservice.reset();
+    }
 
     }else{
-      alert(`¡Ganaste! Tu puntos son: ${this.jugador[1].puntos}`)
-      this.router.navigate(['']);
+      this.mensaje=`¡Ganaste! Tu puntos son: ${this.jugador[1].puntos}`
+      //this.router.navigate(['']);
       this.partidaservice.reset();
     }
   }
@@ -133,6 +135,8 @@ export class TableroComponent implements OnInit {
    if(obj.numero== 1){
     const result: boolean = confirm(
       'Quiere que la carta A valga 11?'
+
+
     );
     if(result){
      this.jugador[this.idjugador].puntos=this.partidaservice.calcularPuntos(10);
@@ -141,9 +145,11 @@ export class TableroComponent implements OnInit {
    this.jugador[this.idjugador].puntos=this.partidaservice.calcularPuntos(obj.numero);
 
    if(this.jugador[this.idjugador].puntos>21){
-    alert(`¡Perdiste! superaste los 21 puntos. Tu puntos son: ${this.jugador[this.idjugador].puntos}`)
-    this.router.navigate(['']);
+    this.mensaje=`¡Perdiste! superaste los 21 puntos. Tu puntos son: ${this.jugador[this.idjugador].puntos}`
+    //this.router.navigate(['']);
     this.partidaservice.reset();
+    this.finalizar=true;
+    this.stand=true;
    }
   }
 
