@@ -15,8 +15,6 @@ export class TableroComponent implements OnInit {
   obj: any;
   cartas: Carta[]=[];
   sum: number=0;
-  //sumJugador: number=0;
-  //c: string;
   idjugador: number=0;
   nombreJugador: string;
   jugador: Jugador[]=[];
