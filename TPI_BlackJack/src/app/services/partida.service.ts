@@ -63,6 +63,9 @@ export class PartidaService {
 
   reset(){
     this.suma=0;
+    for(let i=0;i<52;i++){
+      this.carta[i].activo=false
+    }
   }
 
 
