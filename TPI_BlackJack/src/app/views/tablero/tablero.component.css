@@ -42,3 +42,27 @@ button{
     width: 300px;
     margin-bottom: 30px;
 }
+.ganador{
+    font-family: helvetica, arial, sans-serif;
+    animation: 1.5s anim-flipX ease infinite;  
+    font-size: 2em;
+    font-weight: bold;
+    color:red;
+}
+
+@keyframes anim-flipX {
+    0% {
+      opacity: 0;
+      transform: rotateX(90def);
+    }
+    50% {
+      opacity: 1;
+      transform: rotateX(720deg);
+    }
+    100% {
+      /* animate nothing to pause animation at the end */
+      opacity: 1;
+      transform: rotateX(720deg);
+    }
+  }
+  
