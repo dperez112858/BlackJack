@@ -22,6 +22,8 @@ export class TableroComponent implements OnInit {
   finalizar: boolean;
   mensaje: string;
   iniciar: boolean;
+  blackjack: boolean;
+  compro: boolean;
   
   
   constructor(private partidaservice: PartidaService, private router: Router, private activatedRoute: ActivatedRoute) { 
@@ -29,9 +31,11 @@ export class TableroComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.blackjack=false;
     this.iniciar=true;
     this.finalizar=false;
     this.stand=true;
+    this.compro=true;
     this.mensaje="";
   this.partidaservice.barajar();
   this.activatedRoute.params.subscribe({
@@ -61,7 +65,32 @@ export class TableroComponent implements OnInit {
     this.idjugador=1;
     this.pedir();
     this.pedir();
+
+    if((this.cartas[1].numero>=10 && this.cartas[2].numero==1 ) || (this.cartas[2].numero>=10 && this.cartas[1].numero==1 )){
+      this.jugador[this.idjugador].puntos=this.partidaservice.calcularPuntos(10);
+    }
+    if(this.cartas[1].numero==1  && this.cartas[2].numero<10 && this.cartas[2].numero>1){
+      const result: boolean = confirm( `Quiere que la carta A valga 11? tiene ${this.cartas[2].numero} puntos (en caso de no aceptar el valor de A sera 1)`);
+        if(result){ this.jugador[this.idjugador].puntos=this.partidaservice.calcularPuntos(10); 
+        } 
+    }
+    if(this.cartas[2].numero==1  && this.cartas[1].numero<10 && this.cartas[1].numero>1){
+      const result: boolean = confirm( `Quiere que la carta A valga 11? tiene ${this.cartas[1].numero} puntos (en caso de no aceptar el valor de A sera 1)`);
+        if(result){ this.jugador[this.idjugador].puntos=this.partidaservice.calcularPuntos(10); 
+        } 
+    }
+
+
+
+    if(this.jugador[this.idjugador].puntos==21){
+      this.blackjack=true;
+      this.mensaje=`¡BLACKJACK! `
+      this.partidaservice.reset()
+      this.stand=true;
+      this.finalizar=true;
+    }
     this.stand=false;
+    this.compro=false;
   }
 
   inicio(){
@@ -86,6 +115,8 @@ export class TableroComponent implements OnInit {
     this.partidaservice.calcularPuntos(x);
     this.idjugador=0;
 
+    
+
 
      while(this.jugador[0].puntos<17){
 
@@ -99,12 +130,30 @@ export class TableroComponent implements OnInit {
       }
      this.cartas.push(o);
 
+     if(this.jugador[0].puntos==1 && obj.numero>=10){
+      this.jugador[0].puntos=this.partidaservice.calcularPuntos(10);
+     }
+     if(this.jugador[0].puntos==10 && obj.numero==1){
+      this.jugador[0].puntos=this.partidaservice.calcularPuntos(10);
+     }
+     if(obj.numero==1){
+      let i=this.jugador[0].puntos+11
+      if(i==21){
+        this.jugador[0].puntos=this.partidaservice.calcularPuntos(10);
+      }
+      if(i<21 && i>this.jugador[1].puntos){
+        this.jugador[0].puntos=this.partidaservice.calcularPuntos(10);
+      }
+     }
+
      this.jugador[0].puntos=this.partidaservice.calcularPuntos(obj.numero);
 
      
     }
     this.finalizar=true;
-    this.comprobar();
+    if(this.blackjack==false){
+      this.comprobar();
+    }
 
   }
 
@@ -122,6 +171,8 @@ export class TableroComponent implements OnInit {
 
 
    comprobar(){
+
+
     if(this.jugador[0].puntos>21){
       this.mensaje=`¡Ganaste! la maquina perdio por tener mas de 21 puntos`
     }
@@ -151,17 +202,24 @@ export class TableroComponent implements OnInit {
 
    this.cartas.push(o);
 
-   if(obj.numero== 1){
-    const result: boolean = confirm(
-      'Quiere que la carta A valga 11?'
+    if(this.compro==false){
+      if(obj.numero==1){
+        if(this.jugador[this.idjugador].puntos==10){
+          this.jugador[this.idjugador].puntos=this.partidaservice.calcularPuntos(10);
+        }
+  
+        if(this.jugador[this.idjugador].puntos<10 ){
+          const result: boolean = confirm( `Quiere que la carta A valga 11? tiene ${this.jugador[this.idjugador].puntos} puntos (en caso de no aceptar el valor de A sera 1)`);
+          if(result){ this.jugador[this.idjugador].puntos=this.partidaservice.calcularPuntos(10); 
+          } 
+        }
+      }
 
-
-    );
-    if(result){
-     this.jugador[this.idjugador].puntos=this.partidaservice.calcularPuntos(10);
     }
-   }
-   this.jugador[this.idjugador].puntos=this.partidaservice.calcularPuntos(obj.numero);
+
+ 
+    this.jugador[this.idjugador].puntos=this.partidaservice.calcularPuntos(obj.numero);
+
 
    if(this.jugador[this.idjugador].puntos>21){
     this.mensaje=`¡Perdiste! superaste los 21 puntos`

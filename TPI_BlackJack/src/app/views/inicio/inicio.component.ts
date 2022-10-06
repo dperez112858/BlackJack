@@ -19,7 +19,7 @@ export class InicioComponent implements OnInit {
 
   jugar(nombreJugador: string){
     if(nombreJugador == null || nombreJugador.trim().length ===0 ){
-      alert('debe introducir un nombre')
+      alert('Debe introducir un nombre')
       this.router.navigate([''])
     }else{
       this.router.navigate(['juego', nombreJugador]);
