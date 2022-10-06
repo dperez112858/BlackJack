@@ -9,7 +9,7 @@
       <button class="btn btn-primary" *ngIf="iniciar==false" (click)="pedir()" [ngClass]="{disabled : stand}">Pedir</button>
       <button class="btn btn-primary" *ngIf="iniciar==false" (click)="pasar()" [ngClass]="{disabled : stand}">Pasar</button>
       <br>
-      <p>{{ mensaje }}</p>
+      <p [ngClass]="{'ganador': blackjack}">{{ mensaje }}</p>
       <button *ngIf="finalizar" class="btn btn-primary" (click)="reiniciar()">Reiniciar partida</button>
       <button *ngIf="finalizar" class="btn btn-primary" routerLink="">Finalizar partida</button>
       <br>

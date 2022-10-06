@@ -84,7 +84,7 @@ export class TableroComponent implements OnInit {
 
     if(this.jugador[this.idjugador].puntos==21){
       this.blackjack=true;
-      this.mensaje=`¡BLACKJACK! `
+      this.mensaje=`¡BLACKJACK!`
       this.partidaservice.reset()
       this.stand=true;
       this.finalizar=true;
@@ -174,7 +174,7 @@ export class TableroComponent implements OnInit {
 
 
     if(this.jugador[0].puntos>21){
-      this.mensaje=`¡Ganaste! la maquina perdio por tener mas de 21 puntos`
+      this.mensaje=`¡Ganaste! la banca perdio por tener mas de 21 puntos`
     }
     if(this.jugador[0].puntos>this.jugador[1].puntos && this.jugador[0].puntos<=21){
       this.mensaje=`¡Perdiste!` }
