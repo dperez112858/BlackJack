@@ -55,8 +55,6 @@ export class TableroComponent implements OnInit {
     puntos: 0
   }
   this.jugador.push(x1)
-
-
   }
 
   repartir(){
