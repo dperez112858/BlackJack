@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Carta } from '../models/carta';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -94,8 +95,6 @@ export class PartidaService {
   pedirCarta(): Observable<any> {
     return this.http.get(this.apiUrlBase + "/pedir");
   }
-
-
 
 
 }
