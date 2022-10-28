@@ -6,13 +6,22 @@
             <div class="col-sm">
                 <img src="../../../assets/media/bj_logo.png" alt="" class="logo">
                 <br>
-                <form>
+                <form [formGroup]>
                     <div>
-                        <input type="text" class="form-control" name="nombreJugador" [(ngModel)]="nombreJugador"
-                            id="nombreJugador" placeholder="ingrese su nombre" />
+                        <label for="inputUsuario" class="form-label">Usuario</label>
+    <input type="text" class="form-control" id="inputUsuario" formControlName="usuario">
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary" routerLink="juego" (click)="jugar(nombreJugador)">Jugar</button>
+                    <div>
+                        <label for="inputClave" class="form-label">Clave</label>
+    <input type="password" class="form-control" id="inputClave" formControlName="clave">
+                    </div>
+                    <p *ngIf="mensajeError" style="color: tomato;">
+                        {{ mensajeError }}
+                      </p>
+                    <br>
+                    <button type="submit" class="btn btn-primary" (click)="ingresar()">Ingresar</button>
+                    <button class="btn btn-primary nolink"><a routerLink="registro">Registrarse</a></button>
                     <br>
                     <br>
                     <h2>TPI - DABD</h2>

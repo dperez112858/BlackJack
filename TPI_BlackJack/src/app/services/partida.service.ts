@@ -82,7 +82,7 @@ export class PartidaService {
   actualizarPorAs(n: number, m: number): Observable<any> {
     const url = this.apiUrlBase + "/as"
     const headers = { 'content-type': 'application/json' };
-    const body = JSON.stringify(m);
+    const body = JSON.stringify(m); 
     return this.http.put(url, body, { 'headers': headers })
   }
 

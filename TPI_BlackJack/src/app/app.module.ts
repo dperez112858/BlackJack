@@ -7,12 +7,14 @@ import { TableroComponent } from './views/tablero/tablero.component';
 import { InicioComponent } from './views/inicio/inicio.component';
 import { PartidaService } from './services/partida.service';
 import { FormsModule } from '@angular/forms';
+import { RegistroComponent } from './views/registro/registro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableroComponent,
-    InicioComponent
+    InicioComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,

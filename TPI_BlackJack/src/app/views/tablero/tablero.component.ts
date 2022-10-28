@@ -45,6 +45,7 @@ export class TableroComponent implements OnInit {
   var x0={
     idjugador: 0,
     nombre: "maquina",
+    password: "",
     puntos: 0
   }
   this.jugador.push(x0)
@@ -52,6 +53,7 @@ export class TableroComponent implements OnInit {
   var x1={
     idjugador: 1,
     nombre: this.nombreJugador,
+    password: "",
     puntos: 0
   }
   this.jugador.push(x1)

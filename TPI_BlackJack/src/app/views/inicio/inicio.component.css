@@ -15,10 +15,13 @@
     }
   
   .logo{
-    margin: 40px;
+    margin: 20px;
     width: 600px;
   }
   
+  .ingreso{
+    margin: 40px;
+  }
   .oval {
     width: 1300px;
     height: 600px;
@@ -26,4 +29,8 @@
     -webkit-border-radius: 50%;
     border-radius: 50%;
     background: #005500;
+}
+.nolink {
+  color: antiquewhite;
+  margin-left: 20px;
 }
