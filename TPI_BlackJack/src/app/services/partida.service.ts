@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Carta } from '../models/carta';
+import { Croupier } from '../models/croupier';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PartidaService {
+
 
   apiUrlBase: string = environment.baseUrl;
 
@@ -22,6 +25,7 @@ export class PartidaService {
 
 
   constructor(private http: HttpClient) { }
+
 
   barajar() {
     for (let i = 0; i < this.palo.length; i++) {
@@ -41,7 +45,7 @@ export class PartidaService {
 
   }
 
-  pedir(): Carta {
+/*   pedir(): Carta {
     this.indice = Math.floor(Math.random() * 52);
     if (this.carta[this.indice].activo == true) {
       this.pedir();
@@ -50,9 +54,9 @@ export class PartidaService {
 
     return this.carta[this.indice];
 
-  }
+  } */
 
-  calcularPuntos(numero: number): number {
+/*   calcularPuntos(numero: number): number {
 
     if (numero >= 10) {
       this.suma += 10
@@ -71,7 +75,7 @@ export class PartidaService {
       this.carta[i].activo = false
     }
   }
-
+ */
   //[GET]/puntos/{num}
   obtenerPuntos(num: number): Observable<any> {
     return this.http.get(this.apiUrlBase + "/puntos/" + num);
@@ -92,7 +96,11 @@ export class PartidaService {
 
   //[GET]/pedir
   pedirCarta(): Observable<any> {
-    return this.http.get(this.apiUrlBase + "/pedir");
+    return this.http.get(this.apiUrlBase + "/play/pedir");
+  }
+
+  pedirCroupier(): Observable<Croupier> {
+    return this.http.get<Croupier>(this.apiUrlBase + "/play/pedirCroupier")
   }
 
 

@@ -7,6 +7,7 @@ import { TableroComponent } from './views/tablero/tablero.component';
 import { InicioComponent } from './views/inicio/inicio.component';
 import { PartidaService } from './services/partida.service';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [PartidaService],
   bootstrap: [AppComponent]
