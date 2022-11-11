@@ -4,17 +4,17 @@
       <br>
       <!--<p><app-inicio>[nombreJugador=]</app-inicio></p>-->
       <img src="../../../assets/media/bj_logo.png" alt="logo" class="logo">
-      <h3>Banca: {{jugador[0].puntos}}</h3>
-      <h3>{{jugador[1].nombre}}: {{jugador[1].puntos}}</h3>
-      <button class="btn btn-primary" *ngIf="iniciar==false" (click)="pedir()" [ngClass]="{disabled : stand}">Pedir</button>
-      <button class="btn btn-primary" *ngIf="iniciar==false" (click)="pasar()" [ngClass]="{disabled : stand}">Pasar</button>
+      <h3>Banca: </h3>
+      <h3></h3>
+      <button class="btn btn-primary" *ngIf="iniciar==false"  [ngClass]="{disabled : stand}">Pedir</button>
+      <button class="btn btn-primary" *ngIf="iniciar==false"  [ngClass]="{disabled : stand}">Pasar</button>
       <br>
       <p [ngClass]="{'ganador': blackjack}">{{ mensaje }}</p>
-      <button *ngIf="finalizar" class="btn btn-primary" (click)="reiniciar()">Reiniciar partida</button>
+      <button *ngIf="finalizar" class="btn btn-primary" >Reiniciar partida</button>
       <button *ngIf="finalizar" class="btn btn-primary" routerLink="">Finalizar partida</button>
       <br>
       <br>
-      <button *ngIf="iniciar" class="btn btn-primary" (click)="repartir()">Repartir</button>
+      <button *ngIf="iniciar" class="btn btn-primary" >Repartir</button>
     </div>
     <div class="col-8 tablero">
       <div class="row crupierCarta">
@@ -40,7 +40,11 @@
   </div>
 </div>
 
+<div class="" style="background-color: white;">
+  <h1 style="color: black;">hola</h1>
+  {{croupier.puntos}}
 
+</div>
 
 
 

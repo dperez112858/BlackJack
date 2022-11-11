@@ -3,6 +3,8 @@ import { PartidaService } from 'src/app/services/partida.service';
 import { Carta } from 'src/app/models/carta';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Jugador } from 'src/app/models/jugador';
+import { Subscription } from 'rxjs';
+import { Croupier } from 'src/app/models/croupier';
 
 
 @Component({
@@ -11,6 +13,11 @@ import { Jugador } from 'src/app/models/jugador';
   styleUrls: ['./tablero.component.css']
 })
 export class TableroComponent implements OnInit {
+
+  private subscription = new Subscription();
+
+
+  croupier=  {} as Croupier;
   
   obj: any;
   cartas: Carta[]=[];
@@ -24,14 +31,21 @@ export class TableroComponent implements OnInit {
   iniciar: boolean;
   blackjack: boolean;
   compro: boolean;
+
+  cartita: any;
+
+  suma:any;
   
   
   constructor(private partidaservice: PartidaService, private router: Router, private activatedRoute: ActivatedRoute) { 
-    
+
   }
 
   ngOnInit(): void {
-    this.blackjack=false;
+    this.getCroupier();
+
+
+/*     this.blackjack=false;
     this.iniciar=true;
     this.finalizar=false;
     this.stand=true;
@@ -54,11 +68,30 @@ export class TableroComponent implements OnInit {
     nombre: this.nombreJugador,
     puntos: 0
   }
-  this.jugador.push(x1)
+  this.jugador.push(x1) */
   }
 
+  getCroupier(){
+    this.subscription.add(
+      this.partidaservice.pedirCroupier().subscribe({
+        next: (respuesta: Croupier) =>{
+          this.croupier=respuesta;
+          console.log(this.croupier)
+          
+        },
+        error: () => {
+          alert('Error al obtener datos del croupier');
+        },
+      })
+    );
+  }
+
+
+
+
+/*
   repartir(){
-    this.iniciar=false;
+     this.iniciar=false;
     this.inicio();
     this.idjugador=1;
     this.pedir();
@@ -88,12 +121,15 @@ export class TableroComponent implements OnInit {
       this.finalizar=true;
     }
     this.stand=false;
-    this.compro=false;
-  }
-
+    this.compro=false; 
+  }*/
+/* 
   inicio(){
-    var obj= this.partidaservice.pedir();
-      var o={
+
+
+    var obj= this.partidaservice.pedirCarta();
+    console.log(obj);
+/*       var o={
         numero: obj.numero,
         palo: obj.palo,
         activo: true,
@@ -104,10 +140,11 @@ export class TableroComponent implements OnInit {
      this.jugador[0].puntos=this.partidaservice.calcularPuntos(obj.numero);
 
     this.partidaservice.reset();
-    this.sum=0;
+    this.sum=0; 
 
-  }
+  }*/
 
+  /* 
    maquina(){
     let x = this.jugador[0].puntos
     this.partidaservice.calcularPuntos(x);
@@ -151,11 +188,12 @@ export class TableroComponent implements OnInit {
     this.finalizar=true;
     if(this.blackjack==false){
       this.comprobar();
-    }
+    } 
 
   }
+  */
 
-  reiniciar(){
+ /*  reiniciar(){
     this.cartas.splice(0,10)
     this.jugador.splice(0,10);
     this.partidaservice.reset();
@@ -165,10 +203,10 @@ export class TableroComponent implements OnInit {
     this.mensaje="";
     this.finalizar=false;
   }
+ */
 
 
-
-   comprobar(){
+/*    comprobar(){
 
 
     if(this.jugador[0].puntos>21){
@@ -185,9 +223,9 @@ export class TableroComponent implements OnInit {
 
 
     this.partidaservice.reset();
-  }
+  } */
 
-  pedir(){
+ /*  pedir(){
 
     var obj= this.partidaservice.pedir();
     var o={
@@ -235,6 +273,6 @@ export class TableroComponent implements OnInit {
     this.maquina()
     
 
-  }
+  } */
 
 }
